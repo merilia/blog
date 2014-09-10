@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Sept 04, 2014 kell 02:56 PM
+-- Loomise aeg: Sept 10, 2014 kell 01:46 PM
 -- Serveri versioon: 5.5.39
 -- PHP versioon: 5.4.31
 
@@ -14,6 +14,28 @@ SET time_zone = "+00:00";
 --
 -- Andmebaas: `blog`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabeli struktuur tabelile `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+`comment_id` int(10) unsigned NOT NULL,
+  `comment_text` text NOT NULL,
+  `comment_author` varchar(50) NOT NULL,
+  `comment_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `post_id` int(10) unsigned NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Andmete tõmmistamine tabelile `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `comment_text`, `comment_author`, `comment_created`, `post_id`) VALUES
+(1, 'Tere-tere!', 'Jumal', '2014-09-10 11:39:47', 1);
 
 -- --------------------------------------------------------
 
@@ -42,6 +64,46 @@ INSERT INTO `post` (`post_id`, `post_subject`, `post_text`, `post_created`, `use
 -- --------------------------------------------------------
 
 --
+-- Tabeli struktuur tabelile `post_tags`
+--
+
+DROP TABLE IF EXISTS `post_tags`;
+CREATE TABLE IF NOT EXISTS `post_tags` (
+  `post_id` int(11) unsigned NOT NULL,
+  `tag_id` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Andmete tõmmistamine tabelile `post_tags`
+--
+
+INSERT INTO `post_tags` (`post_id`, `tag_id`) VALUES
+(1, 1),
+(2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Tabeli struktuur tabelile `tag`
+--
+
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE IF NOT EXISTS `tag` (
+`tag_id` int(10) unsigned NOT NULL,
+  `tag_name` varchar(25) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Andmete tõmmistamine tabelile `tag`
+--
+
+INSERT INTO `tag` (`tag_id`, `tag_name`) VALUES
+(1, 'lillepood'),
+(2, 'sitt');
+
+-- --------------------------------------------------------
+
+--
 -- Tabeli struktuur tabelile `user`
 --
 
@@ -65,10 +127,28 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `deleted`) VALUES
 --
 
 --
+-- Indeksid tabelile `comment`
+--
+ALTER TABLE `comment`
+ ADD PRIMARY KEY (`comment_id`), ADD KEY `post_id` (`post_id`);
+
+--
 -- Indeksid tabelile `post`
 --
 ALTER TABLE `post`
  ADD PRIMARY KEY (`post_id`), ADD KEY `user_id` (`user_id`);
+
+--
+-- Indeksid tabelile `post_tags`
+--
+ALTER TABLE `post_tags`
+ ADD PRIMARY KEY (`post_id`,`tag_id`), ADD KEY `tag_id` (`tag_id`);
+
+--
+-- Indeksid tabelile `tag`
+--
+ALTER TABLE `tag`
+ ADD PRIMARY KEY (`tag_id`);
 
 --
 -- Indeksid tabelile `user`
@@ -81,10 +161,20 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT tabelile `comment`
+--
+ALTER TABLE `comment`
+MODIFY `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT tabelile `post`
 --
 ALTER TABLE `post`
 MODIFY `post_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT tabelile `tag`
+--
+ALTER TABLE `tag`
+MODIFY `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT tabelile `user`
 --
@@ -95,8 +185,21 @@ MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 
 --
+-- Piirangud tabelile `comment`
+--
+ALTER TABLE `comment`
+ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`);
+
+--
 -- Piirangud tabelile `post`
 --
 ALTER TABLE `post`
 ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Piirangud tabelile `post_tags`
+--
+ALTER TABLE `post_tags`
+ADD CONSTRAINT `post_tags_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
+ADD CONSTRAINT `post_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`);
 SET FOREIGN_KEY_CHECKS=1;
