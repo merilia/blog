@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Sept 10, 2014 kell 01:46 PM
+-- Loomise aeg: Sept 10, 2014 kell 03:18 PM
 -- Serveri versioon: 5.5.39
 -- PHP versioon: 5.4.31
 
@@ -28,14 +28,18 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `comment_author` varchar(50) NOT NULL,
   `comment_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `post_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Andmete tõmmistamine tabelile `comment`
 --
 
 INSERT INTO `comment` (`comment_id`, `comment_text`, `comment_author`, `comment_created`, `post_id`) VALUES
-(1, 'Tere-tere!', 'Jumal', '2014-09-10 11:39:47', 1);
+(1, 'Tere-tere!', 'Jumal', '2014-09-10 11:39:47', 1),
+(5, 'asdasd', 'Klaabu', '2014-09-10 12:43:02', 1),
+(6, 'asdasd', 'Klaabu', '2014-09-10 12:43:09', 1),
+(7, 'asdasd', 'Klaabu', '2014-09-10 12:44:31', 1),
+(8, 'WEWE', 'Klaabu', '2014-09-10 12:45:57', 1);
 
 -- --------------------------------------------------------
 
@@ -164,7 +168,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT tabelile `comment`
 --
 ALTER TABLE `comment`
-MODIFY `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT tabelile `post`
 --
@@ -202,4 +206,10 @@ ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id
 ALTER TABLE `post_tags`
 ADD CONSTRAINT `post_tags_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
 ADD CONSTRAINT `post_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`);
+
+--
+-- Piirangud tabelile `tag`
+--
+ALTER TABLE `tag`
+ADD CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `post` (`post_id`);
 SET FOREIGN_KEY_CHECKS=1;

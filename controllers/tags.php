@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Maile
- * Date: 4.09.14
- * Time: 16:16
- */
+
 class tags extends Controller
 {
     function index()

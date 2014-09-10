@@ -31,4 +31,10 @@ class posts extends Controller{
         $this->tags = get_all("SELECT*FROM post_tags NATURAL JOIN tag WHERE post_id='$post_id'");
         $this->comments = get_all ("SELECT*FROM comment NATURAL JOIN post WHERE post_id='$post_id'");
     }
+    function view_post() {
+        $data = $_POST['data'];
+        $data['post_id'] = $this->params[0];
+        $data['comment_author']='Klaabu';
+        insert('comment', $data);
+    }
 }
