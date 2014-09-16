@@ -8,7 +8,8 @@
 
         <div class="pull-right">
             <? foreach ($tags as $tag): ?>
-                <a href="#"><span class="label label -info">
+                <a href="tags/view/<?=$tag[‘tag_name’]?>">
+                    <span class="label label -info">
                     <?= $tag['tag_name'] ?></span></a>
             <? endforeach ?>
             <span class="label">alice</span>
