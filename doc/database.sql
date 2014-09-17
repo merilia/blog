@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Sept 10, 2014 kell 03:18 PM
+-- Loomise aeg: Sept 17, 2014 kell 03:15 PM
 -- Serveri versioon: 5.5.39
 -- PHP versioon: 5.4.31
 
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `comment_author` varchar(50) NOT NULL,
   `comment_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `post_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Andmete tõmmistamine tabelile `comment`
@@ -39,7 +39,8 @@ INSERT INTO `comment` (`comment_id`, `comment_text`, `comment_author`, `comment_
 (5, 'asdasd', 'Klaabu', '2014-09-10 12:43:02', 1),
 (6, 'asdasd', 'Klaabu', '2014-09-10 12:43:09', 1),
 (7, 'asdasd', 'Klaabu', '2014-09-10 12:44:31', 1),
-(8, 'WEWE', 'Klaabu', '2014-09-10 12:45:57', 1);
+(8, 'WEWE', 'Klaabu', '2014-09-10 12:45:57', 1),
+(9, 'asdasd', 'Klaabu', '2014-09-10 13:29:04', 1);
 
 -- --------------------------------------------------------
 
@@ -54,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `post_text` text NOT NULL,
   `post_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Andmete tõmmistamine tabelile `post`
@@ -63,7 +64,8 @@ CREATE TABLE IF NOT EXISTS `post` (
 INSERT INTO `post` (`post_id`, `post_subject`, `post_text`, `post_created`, `user_id`) VALUES
 (1, 'Tere, maailm!', 'Hallo, Kosmos!', '2014-09-04 11:42:53', 1),
 (2, 'Tere, maailm!', 'Hallo, Kosmos!', '2014-09-04 11:42:59', 1),
-(3, '', '', '2014-09-04 11:43:21', 1);
+(3, '', '', '2014-09-04 11:43:21', 1),
+(4, 'hallo', 'jou', '2014-09-17 13:13:58', 1);
 
 -- --------------------------------------------------------
 
@@ -117,14 +119,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(25) NOT NULL,
   `password` varchar(255) NOT NULL,
   `deleted` tinyint(3) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Andmete tõmmistamine tabelile `user`
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `deleted`) VALUES
-(1, 'demo', 'demo', 0);
+(1, 'demo', 'demo', 0),
+(2, 'Merili', '051912748', 0);
 
 --
 -- Indeksid tõmmistatud tabelitele
@@ -168,12 +171,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT tabelile `comment`
 --
 ALTER TABLE `comment`
-MODIFY `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT tabelile `post`
 --
 ALTER TABLE `post`
-MODIFY `post_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `post_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT tabelile `tag`
 --
@@ -183,7 +186,7 @@ MODIFY `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT tabelile `user`
 --
 ALTER TABLE `user`
-MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Tõmmistatud tabelite piirangud
 --

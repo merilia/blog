@@ -1,9 +1,11 @@
 <?php
-class logout extends Controller
+class login extends Controller
 {
+    public $requires_auth = true;
+
     function index()
     {
-        session_destroy();
         header('Location: '.BASE_URL);
+
     }
 }
