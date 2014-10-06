@@ -104,8 +104,8 @@ CREATE TABLE IF NOT EXISTS `tag` (
 --
 
 INSERT INTO `tag` (`tag_id`, `tag_name`) VALUES
-(1, 'üks'),
-(2, 'kaks');
+(1, 'lillepood'),
+(2, 'sitt');
 
 -- --------------------------------------------------------
 
